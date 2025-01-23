@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsa In C</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Program Problems List</h1>
+        <input type="text" id="searchBar" placeholder="Search Problem..." onkeyup="searchProblems()">
+    </header>
+
+    <div class="program-list">
+        <div class="program-item" id="program1">
+            <span class="program-number">1.</span>
+            <span class="program-name">Program to input and output array.</span>
+            <button class="download-btn">
+                <a href="files/IO.C" download>Download Solution</a>
+            </button>
+        </div>
+        <div class="program-item" id="program2">
+            <span class="program-number">2.</span>
+            <span class="program-name">Program to input and output array using function.</span>
+            <button class="download-btn">
+                <a href="files/IOUF.C" download>Download Solution</a>
+            </button>
+        </div>
+        <div class="program-item" id="program3">
+            <span class="program-number">3.</span>
+            <span class="program-name">Problem 3</span>
+            <button class="download-btn">
+                <a href="files/solution3.zip" download>Download Solution</a>
+            </button>
+        </div>
+        <!-- Add more programs here as needed -->
+    </div>
+
+    <div id="message" class="message"></div>
+
+     <!-- Form to send the unlisted problem to programmer -->
+     <div id="problem-form" style="display: none;">
+        <h3>Your Problem is not listed. It will be sent to the programmer.</h3>
+        <form id="userProblemForm" name="submit-to-google-sheet">
+            <label for="problemName">Problem Name:</label>
+            <input type="text" id="problemName" name="problemName" required>
+            <button type="submit">Send to Programmer</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+    
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwOk202uExw9ngJA480lJmvjYwFJI75-aAaJNLcgyEXZ-hozQZuswZKxCsYhLt0gT0s/exec';
+const form = document.forms['submit-to-google-sheet'];
+const messageElement = document.getElementById('message');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+
+  messageElement.innerHTML = 'Sending problem to programmer...';
+
+ 
+  fetch(scriptURL, {
+    method: 'POST',
+    body: new FormData(form),
+  })
+    .then(response => {
+      if (response.ok) {
+        messageElement.innerHTML = 'Problem successfully sent to the programmer!';
+        setTimeout(() => {
+          messageElement.innerHTML = ''; 
+        }, 5000);
+        form.reset(); 
+      } else {
+        throw new Error('Failed to send problem');
+      }
+    })
+    .catch(error => {
+      messageElement.innerHTML = 'There was an error sending your problem. Please try again later.';
+      console.error('Error:', error.message);
+    });
+});
+
+  </script>
+</body>
+</html>

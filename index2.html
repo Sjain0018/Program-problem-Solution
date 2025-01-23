@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Compiler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #button-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .button-box {
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: rgb(23, 23, 167);
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+            width: 200px;
+        }
+
+        .button-box:hover {
+            background-color:rgb(23, 23, 167);
+            transform: translateY(-3px);
+        }
+
+        #list-container {
+            margin-top: 30px;
+            display: none; 
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #list-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .list-item {
+            font-size: 20px;
+            margin: 10px 0;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .list-item:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-3px);
+        }
+
+        .message {
+            font-size: 18px;
+            color: #FF6347;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none; 
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Choose which compiler you're using</h1>
+
+        <!-- Compiler Selection Buttons -->
+        <div id="button-container">
+            <div class="button-box" onclick="showList('turbo')">Turbo C++</div>
+            <div class="button-box" onclick="showList('online')">Online Editor</div>
+        </div>
+
+        <!-- List of Problems (Initially hidden) -->
+        <div id="list-container">
+            <div id="list-title"></div>
+            <ul id="list">
+                <!-- Dynamic list will be inserted here -->
+            </ul>
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script>
+        function showList(compiler) {
+            const listContainer = document.getElementById('list-container');
+            const listTitle = document.getElementById('list-title');
+            const list = document.getElementById('list');
+            const message = document.getElementById('message');
+
+            // Clear any previous list and message
+            list.innerHTML = '';
+            message.innerHTML = '';
+
+            if (compiler === 'turbo') {
+                listTitle.innerHTML = 'Choose a topic from Turbo C++';
+                // Turbo C++ Topics
+                const topics = ['OOPS', 'DSA in C', 'DSA in C++'];
+                topics.forEach(topic => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-item';
+                    listItem.textContent = topic;
+                    listItem.onclick = function() {
+                        window.location.href = `/turbo-c++/${topic.toLowerCase().replace(/\s/g, '-')}.html`; 
+                    };
+                    list.appendChild(listItem);
+                });
+            } else if (compiler === 'online') {
+                listTitle.innerHTML = 'Choose a topic from Online Editor';
+                // Online Editor Topics
+                const topics = ['OOPS', 'DSA in C', 'DSA in C++'];
+                topics.forEach(topic => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-item';
+                    listItem.textContent = topic;
+                    listItem.onclick = function() {
+                        window.location.href = `/online/${topic.toLowerCase().replace(/\s/g, '-')}.html`; // Navigate to the topic page
+                    };
+                    list.appendChild(listItem);
+                });
+            } else {
+                message.innerHTML = 'No topics available. Please choose a compiler first.';
+            }
+
+            // Show the list container
+            listContainer.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
