@@ -1,25 +1,3 @@
-/*Types of Array in c                   0 1 2 3 4
-1. One dimensional array (1 D Array)
-2. Multidimensional array (2 D Array, 3 D array)
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Wap in c to input and output array using function*/
  #include<stdio.h>
  #include<conio.h>
  #define MAX 10
