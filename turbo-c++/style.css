@@ -38,7 +38,7 @@ input#searchBar {
     font-size: 18px;
 }
 
-.download-btn {
+.view-btn {
     padding: 10px 15px;
     background-color: #007BFF;
     color: white;
@@ -47,12 +47,12 @@ input#searchBar {
     border-radius: 5px;
 }
 
-.download-btn a {
+.view-btn a {
     color: white;
     text-decoration: none;
 }
 
-.download-btn:hover {
+.view-btn:hover {
     background-color: #0056b3;
 }
 
