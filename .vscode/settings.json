@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "IOUF.C": "cpp",
-        "IO.C": "cpp"
+        "IO.C": "cpp",
+        "SUM.C": "cpp"
     }
 }

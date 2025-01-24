@@ -17,40 +17,64 @@
       />
     </header>
 
-    <div class="program-list">
-      <div class="program-item" id="program1">
-        <span class="program-number">1.</span>
-        <span class="program-name">Problem 1</span>
-        <button class="download-btn">
-          <a href="files/IO.C" download>Download Solution</a>
-        </button>
-      </div>
-      <div class="program-item" id="program2">
-        <span class="program-number">2.</span>
-        <span class="program-name"
-          >Program to input and output array using function.</span
+    <div class="program-item" id="program1">
+      <span class="program-number">1.</span>
+      <span class="program-name">Program to input and output an array.</span>
+      <button class="view-btn">
+        <a
+          href="viewFile.html?problemId=program1&problemName=Program%20to%20input%20and%20output%20an%20array"
+          target="_blank"
+          >View Solution</a
         >
-        <button class="download-btn">
-          <a href="files/IOUF.C" download>Download Solution</a>
-        </button>
-      </div>
-      <!-- Add more programs -->
+      </button>
     </div>
+
+    <div class="program-item" id="program2">
+      <span class="program-number">2.</span>
+      <span class="program-name"
+        >Program to input and output an array using function.</span
+      >
+      <button class="view-btn">
+        <a
+          href="viewFile.html?problemId=program2&problemName=Program%20to%20input%20and%20output%20an%20array%20using%20function"
+          target="_blank"
+          >View Solution</a
+        >
+      </button>
+    </div>
+
+    <div class="program-item" id="program3">
+      <span class="program-number">3.</span>
+      <span class="program-name"
+        >Program to input and output and sum of all elements of an array using function.</span
+      >
+      <button class="view-btn">
+        <a
+          href="viewFile.html?problemId=program3&problemName=Program%20to%20input%20and%20output%20and%20sum%20of%20all%20elements%20of%20an%20array%20using%20function"
+          target="_blank"
+          >View Solution</a
+        >
+      </button>
+    </div>
+    <!-- Add more programs -->
 
     <div id="message" class="message"></div>
 
-    <!-- Form to send the unlisted -->
+    <!-- Form to send the unlisted problem-->
     <div id="problem-form" style="display: none">
       <h3>Your Problem is not listed. It will be sent to the programmer.</h3>
       <form id="userProblemForm" name="submit-to-google-sheet">
         <label for="problemName">Problem Name:</label>
         <input type="text" id="problemName" name="problemName" required />
+        <label for="Name">Name:</label>
+        <input type="name" name="Name" required />
+        <label for="Email">Email</label>
+        <input type="email" name="Email" required />
         <button type="submit">Send to Programmer</button>
       </form>
     </div>
     <script src="script.js"></script>
-
-    <!-- <script>
+    <script>
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbwOk202uExw9ngJA480lJmvjYwFJI75-aAaJNLcgyEXZ-hozQZuswZKxCsYhLt0gT0s/exec";
       const form = document.forms["submit-to-google-sheet"];
@@ -83,6 +107,6 @@
             console.error("Error:", error.message);
           });
       });
-    </script> -->
+    </script>
   </body>
 </html>

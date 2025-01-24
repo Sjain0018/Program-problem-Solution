@@ -150,6 +150,8 @@
             listItem.onclick = function () {
               window.location.href = `https://sjain0018.github.io/Program-problem-Solution/turbo-c++/${topic
                 .toLowerCase()
+                .replace(/\s/g, "-")}/${topic
+                .toLowerCase()
                 .replace(/\s/g, "-")}.html`;
             };
             list.appendChild(listItem);

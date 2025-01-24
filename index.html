@@ -97,7 +97,7 @@
 
       <h3>Program Problem Solution</h3>
 
-      <form id="userForm" onsubmit="return submitForm()">
+      <form name="submit-to-google-sheet" id="userForm" onsubmit="return submitForm()">
         <div class="form-group">
           <label for="name">Full Name:</label>
           <input type="text" id="name" name="name" required />
@@ -124,6 +124,17 @@
       </form>
     </div>
 
+    <script>
+       const scriptURL = 'https://script.google.com/macros/s/AKfycbzaS6zxXJQZt0Xi_0UtE8EkiuBnK2IyOOP0M7VzJHjmAP7zHEQCdjcrBgqdDa0xIzjaLA/exec'
+  const form = document.forms['submit-to-google-sheet'];
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+    </script>
     <script>
       function submitForm() {
         window.location.href = "index2.html";
