@@ -2,6 +2,17 @@
     "files.associations": {
         "IOUF.C": "cpp",
         "IO.C": "cpp",
-        "SUM.C": "cpp"
+        "SUM.C": "cpp",
+        "MINSERT.C": "cpp",
+        "MAX.C": "cpp",
+        "MDELE.C": "cpp",
+        "LS.C": "cpp",
+        "INZILIES.C": "cpp",
+        "INSERTBS.C": "cpp",
+        "INSERT.C": "cpp",
+        "DELEBS.C": "cpp",
+        "DELE.C": "cpp",
+        "program6.txt.C": "cpp",
+        "BS.C": "cpp"
     }
 }
