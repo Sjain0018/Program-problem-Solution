@@ -59,12 +59,25 @@
         margin-top: 5px;
         box-sizing: border-box;
       }
-
+     
       .form-group input:focus {
         border-color: rgb(23, 23, 167);
         outline: none;
       }
 
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-top: 5px;
+        box-sizing: border-box;
+      }
+      .form-group select:focus {
+        border-color: rgb(23, 23, 167);
+        outline: none;
+      }
       .form-group button {
         background-color: rgb(23, 23, 167);
         color: white;
@@ -100,22 +113,32 @@
       <form name="submit-to-google-sheet" id="userForm" onsubmit="return submitForm()">
         <div class="form-group">
           <label for="name">Full Name:</label>
-          <input type="text" id="name" name="name" required />
+          <input type="text" id="name" name="name" required placeholder="Name"/>
         </div>
 
         <div class="form-group">
           <label for="email">Email Address:</label>
-          <input type="email" id="email" name="email" required />
+          <input type="email" id="email" name="email" required placeholder="Email"/>
         </div>
 
         <div class="form-group">
           <label for="phone">Phone Number:</label>
-          <input type="tel" id="phone" name="phone" required />
+          <input type="tel" id="phone" name="phone" required placeholder="Phone No"/>
         </div>
 
         <div class="form-group">
           <label for="semester">Semester:</label>
-          <input type="text" id="semester" name="semester" required />
+          <select id="semester" name="semester" required>
+            <option value="0">Choose Semester</option>
+            <option value="1">1st Semester</option>
+            <option value="2">2nd Semester</option>
+            <option value="3">3rd Semester</option>
+            <option value="4">4th Semester</option>
+            <option value="5">5th Semester</option>
+            <option value="6">6th Semester</option>
+            <option value="7">7th Semester</option>
+            <option value="8">8th Semester</option>
+          </select>
         </div>
 
         <div class="form-group">
@@ -125,7 +148,7 @@
 
         <div class="form-group">
           <label for="time">Time:</label>
-          <input type="time" id="time" name="time" required />
+          <input type="text" id="time" name="time" required placeholder="HH:MM AM/PM" />
         </div>
 
         <div class="form-group middle">
@@ -136,6 +159,15 @@
     </div>
 
 
+    <script>
+      document.getElementById('time').addEventListener('blur', function() {
+        const timeInput = this.value;
+        const regex = /^(\d{1,2}):(\d{2}) (AM|PM)$/i;
+        if (!regex.test(timeInput)) {
+          alert('Please enter a valid time in HH:MM AM/PM format');
+        }
+      });
+    </script>
   <script>
    const scriptURL = "https://sheetdb.io/api/v1/2px6qzaaxb5wp";  
     const form = document.forms["submit-to-google-sheet"];
