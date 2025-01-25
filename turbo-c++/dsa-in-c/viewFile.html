@@ -123,7 +123,8 @@
       function downloadFile() {
         const link = document.createElement("a");
         link.href = `files/${problemId}.c`;
-        link.download = `${problemName}.c`;
+        link.download = `${problemName.toLowerCase()
+                .replace(/\s/g, "_")}.c`;
         link.click();
       }
     </script>
