@@ -158,19 +158,26 @@
           });
         } else if (compiler === "desk") {
           listTitle.innerHTML = "Choose a topic from Desk Warrior";
-          // Online Editor Topics
+
           const topics = ["HTML", "CSS", "JAVASCRIPT"];
           topics.forEach((topic) => {
             const listItem = document.createElement("li");
             listItem.className = "list-item";
             listItem.textContent = topic;
-            listItem.onclick = function () {
-              window.location.href = `https://sjain0018.github.io/Program-problem-Solution/desk/${topic
-                .toLowerCase()
-                .replace(/\s/g, "-")}/${topic
-                .toLowerCase()
-                .replace(/\s/g, "-")}.html`; // Navigate to the topic page
-            };
+
+            if (topic === "CSS" || topic === "JAVASCRIPT") {
+              listItem.classList.add("disabled");
+              listItem.style.pointerEvents = "none";
+              listItem.style.opacity = "0.5";
+            } else {
+              listItem.onclick = function () {
+                window.location.href = `https://sjain0018.github.io/Program-problem-Solution/desk/${topic
+                  .toLowerCase()
+                  .replace(/\s/g, "-")}/${topic
+                  .toLowerCase()
+                  .replace(/\s/g, "-")}.html`;
+              };
+            }
             list.appendChild(listItem);
           });
         } else {
