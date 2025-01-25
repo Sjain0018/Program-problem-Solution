@@ -143,12 +143,12 @@
 
         <div class="form-group">
           <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required />
+          <input type="date" id="date" name="date" required readonly/>
         </div>
 
         <div class="form-group">
           <label for="time">Time:</label>
-          <input type="text" id="time" name="time" required placeholder="HH:MM AM/PM" />
+          <input type="text" id="time" name="time" required readonly/>
         </div>
 
         <div class="form-group middle">
@@ -160,11 +160,38 @@
 
 
     <script>
-      document.getElementById('time').addEventListener('blur', function() {
-        const timeInput = this.value;
-        const regex = /^(\d{1,2}):(\d{2}) (AM|PM)$/i;
-        if (!regex.test(timeInput)) {
-          alert('Please enter a valid time in HH:MM AM/PM format');
+      document.getElementById('date').value = new Date().toISOString().split('T')[0];
+     function formatTime(date) {
+        let hours = date.getHours();
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; 
+        const strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+      }
+    
+      const currentTime = new Date();
+      document.getElementById('time').value = formatTime(currentTime);
+    
+      document.getElementById('myForm').addEventListener('submit', function (event) {
+        const dateInput = document.getElementById('date').value;
+        const timeInput = document.getElementById('time').value;
+    
+        const currentDate = new Date().toISOString().split('T')[0];
+        const currentHours = currentTime.getHours();
+        const currentMinutes = currentTime.getMinutes();
+        const currentTimeString = formatTime(currentTime).toUpperCase();
+    
+        if (dateInput < currentDate || (dateInput === currentDate && timeInput < currentTimeString)) {
+          alert("Please select a valid date and time.");
+          event.preventDefault(); 
+        }
+    
+        const timeFormat = /^(0[1-9]|1[0-2]):([0-5][0-9]) (AM|PM)$/i;
+        if (!timeFormat.test(timeInput)) {
+          alert("Please enter a valid time in HH:MM AM/PM format.");
+          event.preventDefault(); 
         }
       });
     </script>
