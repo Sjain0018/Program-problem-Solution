@@ -109,7 +109,7 @@
 
       document.getElementById("problemTitle").textContent = problemName;
 
-      fetch(`files/${problemId}.txt`)
+      fetch(`files/${problemId}.c`)
         .then((response) => response.text())
         .then((text) => {
           document.getElementById("fileContent").textContent = text;
@@ -122,8 +122,8 @@
 
       function downloadFile() {
         const link = document.createElement("a");
-        link.href = `files/${problemId}.txt`;
-        link.download = `${problemName}.txt`;
+        link.href = `files/${problemId}.c`;
+        link.download = `${problemName}.c`;
         link.click();
       }
     </script>
