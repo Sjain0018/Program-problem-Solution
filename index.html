@@ -157,44 +157,45 @@
       </form>
       <div id="message"></div>
     </div>
-
-
     <script>
-      document.getElementById('date').value = new Date().toISOString().split('T')[0];
-     function formatTime(date) {
+      const today = new Date();
+      const formattedDate = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+      document.getElementById('date').value = formattedDate;
+    
+      function formatTime(date) {
         let hours = date.getHours();
         const minutes = date.getMinutes().toString().padStart(2, '0');
         const ampm = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;
-        hours = hours ? hours : 12; 
-        const strTime = hours + ':' + minutes + ' ' + ampm;
-        return strTime;
+        hours = hours ? hours : 12; // Adjust 0 to 12 for 12 AM
+        return hours + ':' + minutes + ' ' + ampm;
       }
     
-      const currentTime = new Date();
-      document.getElementById('time').value = formatTime(currentTime);
+      document.getElementById('time').value = formatTime(today);
     
       document.getElementById('myForm').addEventListener('submit', function (event) {
         const dateInput = document.getElementById('date').value;
         const timeInput = document.getElementById('time').value;
     
-        const currentDate = new Date().toISOString().split('T')[0];
-        const currentHours = currentTime.getHours();
-        const currentMinutes = currentTime.getMinutes();
-        const currentTimeString = formatTime(currentTime).toUpperCase();
+        const currentDate = new Date();
+        const currentDateString = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0');
+        const currentTimeString = formatTime(currentDate);
     
-        if (dateInput < currentDate || (dateInput === currentDate && timeInput < currentTimeString)) {
+        if (dateInput < currentDateString || (dateInput === currentDateString && timeInput < currentTimeString)) {
           alert("Please select a valid date and time.");
-          event.preventDefault(); 
+          event.preventDefault();
         }
     
+        // Validate time format (HH:MM AM/PM)
         const timeFormat = /^(0[1-9]|1[0-2]):([0-5][0-9]) (AM|PM)$/i;
         if (!timeFormat.test(timeInput)) {
           alert("Please enter a valid time in HH:MM AM/PM format.");
-          event.preventDefault(); 
+          event.preventDefault();
         }
       });
     </script>
+    
+    
   <script>
    const scriptURL = "https://sheetdb.io/api/v1/2px6qzaaxb5wp";  
     const form = document.forms["submit-to-google-sheet"];
