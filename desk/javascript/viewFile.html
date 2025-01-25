@@ -30,32 +30,11 @@
         padding: 20px;
       }
 
-      h1 {
-        font-size: 2rem;
-        margin-bottom: 10px;
-        color: #333;
-        text-align: center;
-      }
-
       h2 {
         font-size: 1.5rem;
         margin-bottom: 20px;
-        color: #555;
+        color: black;
         text-align: center;
-      }
-
-      #fileContent {
-        width: 100%;
-        height: 300px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 15px;
-        font-family: "Courier New", monospace;
-        white-space: pre-wrap;
-        overflow-y: scroll;
-        margin-bottom: 20px;
-        color: white;
-        background-color: rgb(1, 1, 19);
       }
 
       .btn {
@@ -67,9 +46,10 @@
         cursor: pointer;
         text-decoration: none;
         font-size: 1rem;
-        margin-top: 10px;
+        margin-top: 20px;
         display: inline-block;
         transition: background-color 0.3s ease;
+        text-align: center;
       }
 
       .btn:hover {
@@ -83,22 +63,18 @@
       .btn-secondary:hover {
         background-color: #007bb5;
       }
+
       .download {
-        display: flex;
         text-align: center;
-        justify-content: center;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>View Content</h1>
       <h2 id="problemTitle"></h2>
-      <div id="fileContent"></div>
+
       <div class="download">
-        <a href="#" class="btn btn-secondary" onclick="downloadFile()"
-          >Download Chapter</a
-        >
+        <a href="#" class="btn btn-secondary" onclick="downloadFile()">Download Assignment</a>
       </div>
     </div>
 
@@ -108,17 +84,6 @@
       const problemName = urlParams.get("problemName");
 
       document.getElementById("problemTitle").textContent = problemName;
-
-      fetch(`files/${problemId}.pdf`)
-        .then((response) => response.text())
-        .then((text) => {
-          document.getElementById("fileContent").textContent = text;
-        })
-        .catch((error) => {
-          document.getElementById("fileContent").textContent =
-            "Failed to load file content.";
-          console.error("Error:", error);
-        });
 
       function downloadFile() {
         const link = document.createElement("a");
