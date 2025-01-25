@@ -110,12 +110,12 @@
   </head>
   <body>
     <div class="container">
-      <h1>Compiler you're using</h1>
+      <h1>Preference</h1>
 
       <!-- Compiler Selection Buttons -->
       <div id="button-container">
         <div class="button-box" onclick="showList('turbo')">Turbo C++</div>
-        <!-- <div class="button-box" onclick="showList('online')">Online Editor</div> -->
+        <div class="button-box" onclick="showList('desk')">Desk Warrior</div>
       </div>
 
       <!-- List of Problems (Initially hidden) -->
@@ -156,16 +156,18 @@
             };
             list.appendChild(listItem);
           });
-        } else if (compiler === "online") {
-          listTitle.innerHTML = "Choose a topic from Online Editor";
+        } else if (compiler === "desk") {
+          listTitle.innerHTML = "Choose a topic from Desk Warrior";
           // Online Editor Topics
-          const topics = ["OOPS", "DSA in C", "DSA in C++"];
+          const topics = ["HTML", "CSS", "JAVASCRIPT"];
           topics.forEach((topic) => {
             const listItem = document.createElement("li");
             listItem.className = "list-item";
             listItem.textContent = topic;
             listItem.onclick = function () {
-              window.location.href = `/online/${topic
+              window.location.href = `/desk/${topic
+                .toLowerCase()
+                .replace(/\s/g, "-")}/${topic
                 .toLowerCase()
                 .replace(/\s/g, "-")}.html`; // Navigate to the topic page
             };
