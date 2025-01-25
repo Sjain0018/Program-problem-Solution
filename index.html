@@ -122,24 +122,69 @@
           <button type="submit">Submit</button>
         </div>
       </form>
+      <div id="message"></div>
     </div>
 
-    <script>
-       const scriptURL = 'https://script.google.com/macros/s/AKfycbzaS6zxXJQZt0Xi_0UtE8EkiuBnK2IyOOP0M7VzJHjmAP7zHEQCdjcrBgqdDa0xIzjaLA/exec'
-  const form = document.forms['submit-to-google-sheet'];
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => console.log('Success!', response))
-      .catch(error => console.error('Error!', error.message))
-  })
-    </script>
-    <script>
-      function submitForm() {
-        window.location.href = "index2.html";
-        return false;
-      }
-    </script>
+  <script>
+   const scriptURL = "https://sheetdb.io/api/v1/2px6qzaaxb5wp";  
+    const form = document.forms["submit-to-google-sheet"];
+    const messageElement = document.getElementById("message");
+
+    function submitForm() {
+      event.preventDefault(); 
+
+      
+      messageElement.innerHTML = "Sending your details...";
+
+     
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const semester = document.getElementById("semester").value;
+
+     
+      const dataObject = {
+        name: name,
+        email: email,
+        phone: phone,
+        semester: semester
+      };
+
+    
+      const jsonData = JSON.stringify({ data: [dataObject] });
+
+     
+      fetch(scriptURL, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: jsonData
+      })
+      .then((response) => {
+        if (response.ok) {
+          messageElement.innerHTML = "Details successfully sent!";
+          
+          
+          setTimeout(() => {
+            window.location.href = "index2.html"; 
+          }, 500); 
+
+          form.reset(); 
+        } else {
+          throw new Error("Failed to send the details");
+        }
+      })
+      .catch((error) => {
+        messageElement.innerHTML = "There was an error sending your details. Please try again later.";
+        console.error("Error:", error.message); 
+      });
+
+      return false; 
+    }
+</script>
+
   </body>
 </html>
