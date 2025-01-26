@@ -196,7 +196,22 @@
     </script>
     
     <script>
+       function submitForm() {
+    event.preventDefault(); 
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const semester = document.getElementById("semester").value;
+
+    // Construct URL with parameters
+    const queryParams = new URLSearchParams();
+    queryParams.append("name", name);
+    queryParams.append("email", email);
+    queryParams.append("phone", phone);
+    queryParams.append("semester", semester);
       window.location.href = `desk/html/viewFile.html?${queryParams.toString()}`
+       }
     </script>
 
   <script>
