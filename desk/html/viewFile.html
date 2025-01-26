@@ -134,7 +134,7 @@
           class="btn btn-secondary"
           onclick="downloadFile()"
           id="downloadBtn"
-          >Download Assignment</a
+          >Download</a
         >
       </div>
     </div>
@@ -181,7 +181,7 @@
       }
 
       function saveUserDetailsToSheetDB(userName, userEmail) {
-        const userDate = new Date().toISOString().split("T")[0];
+        const userDate = new Date().toLocaleDateString();
         const userTime = new Date().toLocaleTimeString();
         const dataObject = {
           name: userName,
