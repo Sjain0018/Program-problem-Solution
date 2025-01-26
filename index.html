@@ -129,26 +129,37 @@
         <div class="form-group">
           <label for="semester">Semester:</label>
           <select id="semester" name="semester" required>
-            <option value="0">Choose Semester</option>
-            <option value="1">1st Semester</option>
-            <option value="2">2nd Semester</option>
-            <option value="3">3rd Semester</option>
-            <option value="4">4th Semester</option>
-            <option value="5">5th Semester</option>
-            <option value="6">6th Semester</option>
-            <option value="7">7th Semester</option>
-            <option value="8">8th Semester</option>
+            <option value="" disabled selected>Choose Semester</option>
+            <option value="1st">1st Semester</option>
+            <option value="2nd">2nd Semester</option>
+            <option value="3rd">3rd Semester</option>
+            <option value="4th">4th Semester</option>
+            <option value="5th">5th Semester</option>
+            <option value="6th">6th Semester</option>
+            <option value="7th">7th Semester</option>
+            <option value="8th">8th Semester</option>
           </select>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
           <label for="date">Date:</label>
           <input type="date" id="date" name="date" required readonly/>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
           <label for="time">Time:</label>
           <input type="text" id="time" name="time" required readonly/>
+        </div>
+
+        <div class="form-group">
+          <label for="course">course:</label>
+          <select id="course" name="course" required>
+            <option value="" disabled selected>Choose course</option>
+            <option value="BCA">BCA</option>
+            <option value="Btech">Btech</option>
+            <option value="BSc">BSc</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
 
         <div class="form-group middle">
@@ -194,26 +205,6 @@
         }
       });
     </script>
-    
-    <script>
-       function submitForm(event) {
-      event.preventDefault();
-
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const phone = document.getElementById("phone").value;
-      const semester = document.getElementById("semester").value;
-
-      const queryParams = new URLSearchParams();
-      queryParams.append("name", name);
-      queryParams.append("email", email);
-      queryParams.append("phone", phone);
-      queryParams.append("semester", semester);
-
-      
-      window.location.href = `/desk/html/viewFile.html?${queryParams.toString()}`;
-    }
-    </script>
 
   <script>
    const scriptURL = "https://sheetdb.io/api/v1/2px6qzaaxb5wp";  
@@ -233,6 +224,7 @@
       const semester = document.getElementById("semester").value;
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
+      const course = document.getElementById("course").value;
 
      
       const dataObject = {
@@ -241,7 +233,8 @@
         phone: phone,
         semester: semester,
         date: date,
-        time: time
+        time: time,
+        course: course
       };
 
     
