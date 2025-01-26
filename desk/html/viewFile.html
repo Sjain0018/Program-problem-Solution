@@ -80,64 +80,63 @@
 
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      const problemId = urlParams.get("problemId");
-      const problemName = urlParams.get("problemName");
+    const problemId = urlParams.get("problemId");
+    const problemName = urlParams.get("problemName");
+    const userName = urlParams.get("name");
+    const userEmail = urlParams.get("email");
+    const userPhone = urlParams.get("phone");
+    const userSemester = urlParams.get("semester");
 
-      document.getElementById("problemTitle").textContent = problemName;
+    document.getElementById("problemTitle").textContent = problemName;
 
-      function downloadFile() {
-        const link = document.createElement("a");
-        link.href = `files/${problemId}.pdf`;
-        link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
-        link.click();
+    function downloadFile() {
+      const link = document.createElement("a");
+      link.href = `files/${problemId}.pdf`;  
+      link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
+      link.click();
 
-        
-        saveUserDetailsToSheetDB();
-      }
-
-      function saveUserDetailsToSheetDB() {
       
-        const userName = "Sample User"; 
-        const userEmail = "user@example.com"; 
-        const userPhone = "1234567890"; 
-        const userSemester = "5"; 
-        const userDate = new Date().toISOString().split('T')[0]; 
-        const userTime = new Date().toLocaleTimeString(); 
+      saveUserDetailsToSheetDB(userName, userEmail, userPhone, userSemester);
+    }
 
-        const dataObject = {
-          name: userName,
-          email: userEmail,
-          phone: userPhone,
-          semester: userSemester,
-          date: userDate,
-          time: userTime,
-          problemId: problemId,
-          problemName: problemName
-        };
+    function saveUserDetailsToSheetDB(userName, userEmail, userPhone, userSemester) {
+      const userDate = new Date().toISOString().split('T')[0]; 
+      const userTime = new Date().toLocaleTimeString(); 
 
-        const jsonData = JSON.stringify({ data: [dataObject] });
+      const dataObject = {
+        name: userName,
+        email: userEmail,
+        phone: userPhone,
+        semester: userSemester,
+        date: userDate,
+        time: userTime,
+        problemId: problemId,
+        problemName: problemName
+      };
 
-        
-        const scriptURL = "https://sheetdb.io/api/v1/9dmoi2rknk1p2/?sheet=sheet2";  
-        fetch(scriptURL, {
-          method: "POST",
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: jsonData
-        })
-        .then((response) => {
-          if (response.ok) {
-            console.log("User download details saved successfull!");
-          } else {
-            throw new Error("Failed to save user download details");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error.message);
-        });
-      }
+      const jsonData = JSON.stringify({ data: [dataObject] });
+
+      const scriptURL = "https://sheetdb.io/api/v1/9dmoi2rknk1p2/?sheet=sheet2";
+ 
+      fetch(scriptURL, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: jsonData
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log("User details saved successfully!");
+        } else {
+          console.log("Failed to save user details.");
+        }
+      })
+      .catch(error => {
+        console.error("Error saving details:", error);
+      });
+    }
     </script>
   </body>
 </html>
