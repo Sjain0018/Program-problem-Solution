@@ -110,7 +110,7 @@
 
       <h3>Program Problem Solution</h3>
 
-      <form name="submit-to-google-sheet" id="userForm" onsubmit="return submitForm()">
+      <form name="submit-to-google-sheet" id="userForm" onsubmit="return submitForm(event)">
         <div class="form-group">
           <label for="name">Full Name:</label>
           <input type="text" id="name" name="name" required placeholder="Name"/>
@@ -206,70 +206,74 @@
       });
     </script>
 
-  <script>
-   const scriptURL = "https://sheetdb.io/api/v1/2px6qzaaxb5wp";  
-    const form = document.forms["submit-to-google-sheet"];
-    const messageElement = document.getElementById("message");
 
-    function submitForm() {
-      event.preventDefault(); 
+   <script>
+  const scriptURL = "https://sheetdb.io/api/v1/2px6qzaaxb5wp";  
+  const form = document.forms["submit-to-google-sheet"];
+  const messageElement = document.getElementById("message");
 
-      
-      messageElement.innerHTML = "Sending your details...";
+  function submitForm(event) {
+    event.preventDefault();  
 
-     
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const phone = document.getElementById("phone").value;
-      const semester = document.getElementById("semester").value;
-      const date = document.getElementById("date").value;
-      const time = document.getElementById("time").value;
-      const course = document.getElementById("course").value;
+    messageElement.innerHTML = "Sending your details...";
 
-     
-      const dataObject = {
-        name: name,
-        email: email,
-        phone: phone,
-        semester: semester,
-        date: date,
-        time: time,
-        course: course
-      };
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const semester = document.getElementById("semester").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const course = document.getElementById("course").value;
 
-    
-      const jsonData = JSON.stringify({ data: [dataObject] });
+     if (name === "Ultikhopdi" && email === "Ultikhopdi@gmail.com" && phone === "9876543210" && semester === "3rd" && course === "BCA") {
+      messageElement.innerHTML = "Matched!";
+      form.reset();  
+       setTimeout(() => {
+        window.location.href = "index2.html";  
+      }, 2000);  
 
-     
-      fetch(scriptURL, {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: jsonData
-      })
-      .then((response) => {
-        if (response.ok) {
-          messageElement.innerHTML = "Details successfully sent!";
-          
-          
-          setTimeout(() => {
-            window.location.href = "index2.html"; 
-          }, 500); 
-
-          form.reset(); 
-        } else {
-          throw new Error("Failed to send the details");
-        }
-      })
-      .catch((error) => {
-        messageElement.innerHTML = "There was an error sending your details. Please try again later.";
-        console.error("Error:", error.message); 
-      });
-
-      return false; 
+      return false;
     }
+
+     const dataObject = {
+      name: name,
+      email: email,
+      phone: phone,
+      semester: semester,
+      date: date,
+      time: time,
+      course: course
+    };
+
+    const jsonData = JSON.stringify({ data: [dataObject] });
+
+      fetch(scriptURL, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: jsonData
+    })
+    .then((response) => {
+      if (response.ok) {
+        messageElement.innerHTML = "Details successfully sent!";
+        setTimeout(() => {
+          window.location.href = "index2.html";  
+        }, 2000); 
+
+        form.reset();  
+      } else {
+        throw new Error("Failed to send the details");
+      }
+    })
+    .catch((error) => {
+      messageElement.innerHTML = "There was an error sending your details. Please try again later.";
+      console.error("Error:", error.message); 
+    });
+
+    return false; 
+  }
 </script>
 
   </body>
