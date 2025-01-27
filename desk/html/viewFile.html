@@ -99,6 +99,22 @@
         background-color: #f0f0f0;
         cursor: not-allowed;
       }
+
+      /* Responsive adjustments for mobile (small screens) */
+      @media (max-width: 600px) {
+        .container {
+          width: 90%;
+          padding: 15px;
+        }
+        .input-container {
+          flex-direction: column; /* Align inputs vertically on small screens */
+          gap: 10px;
+        }
+        .input-container input {
+          max-width: 100%;
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
