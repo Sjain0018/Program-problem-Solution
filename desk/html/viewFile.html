@@ -197,8 +197,8 @@
       }
 
       function saveUserDetailsToSheetDB(userName, userEmail) {
-        const userDate = new Date().toLocaleDateString();
-        const userTime = new Date().toLocaleTimeString();
+        const userDate = new Date().toISOString().split('T')[0];
+        const userTime = new Date().toLocaleTimeString('en-GB', { hour12: false });
         const dataObject = {
           name: userName,
           email: userEmail,
