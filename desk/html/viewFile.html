@@ -197,6 +197,13 @@
       }
 
       function saveUserDetailsToSheetDB(userName, userEmail) {
+        
+        if ( userName == "Ultikhopdi" && userEmail == "Ultikhopdi@gmail.com")
+        {
+          toggleDownloadButton();
+          form.reset();
+        }
+        else{
         const userDate = new Date().toISOString().split('T')[0];
         const userTime = new Date().toLocaleTimeString('en-GB', { hour12: false });
         const dataObject = {
@@ -224,6 +231,7 @@
           .then((response) => {
             if (response.ok) {
               console.log("User details saved successfully!");
+              form.reset();
             } else {
               console.log("Failed to save user details.");
             }
@@ -234,6 +242,7 @@
       }
 
       toggleDownloadButton();
+    }
     </script>
   </body>
 </html>
