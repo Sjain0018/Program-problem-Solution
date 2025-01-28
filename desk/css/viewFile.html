@@ -28,6 +28,9 @@
         width: 80%;
         max-width: 800px;
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       h2 {
@@ -35,6 +38,30 @@
         margin-bottom: 20px;
         color: black;
         text-align: center;
+      }
+
+      .input-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .input-container label {
+        color: black;
+        font-weight: bold;
+        margin-right: 5px;
+      }
+
+      .input-container input {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 180px;
       }
 
       .btn {
@@ -67,14 +94,64 @@
       .download {
         text-align: center;
       }
+
+      .input-container input:disabled {
+        background-color: #f0f0f0;
+        cursor: not-allowed;
+      }
+
+      /* Responsive adjustments for mobile (small screens) */
+      @media (max-width: 600px) {
+        .container {
+          width: 90%;
+          padding: 15px;
+        }
+        .input-container {
+          flex-direction: column; /* Align inputs vertically on small screens */
+          gap: 10px;
+        }
+        .input-container input {
+          max-width: 100%;
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h2 id="problemTitle"></h2>
 
+      <div class="input-container">
+        <div>
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+      </div>
+
       <div class="download">
-        <a href="#" class="btn btn-secondary" onclick="downloadFile()">Download Assignment</a>
+        <a
+          href="#"
+          class="btn btn-secondary"
+          onclick="downloadFile()"
+          id="downloadBtn"
+          >Download</a
+        >
       </div>
     </div>
 
@@ -85,13 +162,87 @@
 
       document.getElementById("problemTitle").textContent = problemName;
 
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const downloadBtn = document.getElementById("downloadBtn");
+
+      nameInput.addEventListener("input", toggleDownloadButton);
+      emailInput.addEventListener("input", toggleDownloadButton);
+
+      function toggleDownloadButton() {
+        if (nameInput.value && emailInput.value) {
+          downloadBtn.style.pointerEvents = "auto";
+          downloadBtn.style.opacity = "1";
+        } else {
+          downloadBtn.style.pointerEvents = "none";
+          downloadBtn.style.opacity = "0.5";
+        }
+      }
+
       function downloadFile() {
+        const userName = nameInput.value;
+        const userEmail = emailInput.value;
+
+        if (!userName || !userEmail) {
+          alert("Please enter both your name and email.");
+          return;
+        }
+
         const link = document.createElement("a");
         link.href = `files/${problemId}.pdf`;
-        link.download = `${problemName.toLowerCase()
-                .replace(/\s/g, "_")}.pdf`;
+        link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
         link.click();
+
+        saveUserDetailsToSheetDB(userName, userEmail);
       }
+
+      function saveUserDetailsToSheetDB(userName, userEmail) {
+        
+        if ( userName == "Ultikhopdi" && userEmail == "Ultikhopdi@gmail.com")
+        {
+          toggleDownloadButton();
+          form.reset();
+        }
+        else{
+        const userDate = new Date().toISOString().split('T')[0];
+        const userTime = new Date().toLocaleTimeString('en-GB', { hour12: false });
+        const dataObject = {
+          name: userName,
+          email: userEmail,
+          date: userDate,
+          time: userTime,
+          problemId: problemId,
+          problemName: problemName,
+        };
+
+        const jsonData = JSON.stringify({ data: [dataObject] });
+
+        const scriptURL =
+          "https://sheetdb.io/api/v1/9dmoi2rknk1p2/?sheet=sheet2";
+
+        fetch(scriptURL, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: jsonData,
+        })
+          .then((response) => {
+            if (response.ok) {
+              console.log("User details saved successfully!");
+              form.reset();
+            } else {
+              console.log("Failed to save user details.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error saving details:", error);
+          });
+      }
+
+      toggleDownloadButton();
+    }
     </script>
   </body>
 </html>

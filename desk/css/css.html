@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSS ASSIGNMENTS</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>CSS ASSIGNMENTS</h1>
-      <input
-        type="text"
-        id="searchBar"
-        placeholder="Search Assignment..."
-        onkeyup="searchProblems()"
-      />
-    </header>
-
-    <div class="program-item" id="program1">
-      <span class="program-number">1.</span>
-      <span class="program-name"
-        >CSS Chapter 1</span
-      >
-      <button class="view-btn">
-        <a
-          href="viewFile.html?problemId=program1&problemName=CSS%20Chapter%201"
-          target="_blank"
-          >View Assignment</a
-        >
-      </button>
-    </div>
-    <script src="script.js"></script>
-  </body>
-</html>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>CSS ASSIGNMENTS</title>
+      <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+      <header>
+        <h1>CSS ASSIGNMENTS</h1>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search Assignment..."
+          onkeyup="searchProblems()"
+        />
+      </header>
+  
+      <div class="program-item" id="program1">
+        <span class="program-number">1.</span>
+        <span class="program-name">CSS Chapter 1</span>
+        <div class="buttons-container">
+          <button class="view-btn" style="pointer-events: none; opacity: 0.5;">
+            <a href="viewFile.html?problemId=program1&problemName=CSS%20Chapter%201" target="_blank">View Assignment</a>
+          </button>
+          <button class="lecture-btn" style="pointer-events: none; opacity: 0.5;" onclick="window.open('https://youtu.be/ek6i4pyoFJE?si=3dM6d_TSpl-hC7Iz', '_blank')">
+            Lecture Video
+          </button>
+        </div>
+      </div>
+  
+      <div class="program-item" id="program1.1">
+        <span class="program-number">1.1</span>
+        <span class="program-name">Solution CSS Chapter 1</span>
+        <div class="buttons-container">
+          <button class="view-btn" style="pointer-events: none; opacity: 0.5;">
+            <a href="viewFile.html?problemId=program1.1&problemName=Solution%20CSS%20Chapter%201" target="_blank">View Solution</a>
+          </button>
+          <button class="lecture-btn" style="pointer-events: none; opacity: 0.5;" onclick="window.open('https://youtu.be/ek6i4pyoFJE?si=3dM6d_TSpl-hC7Iz', '_blank')" style="pointer-events: none; opacity: 0.5;">
+            Explanation
+          </button>
+        </div>
+      </div>
+  
+      <script src="script.js"></script>
+    </body>
+  </html>
+   
