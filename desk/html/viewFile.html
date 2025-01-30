@@ -225,20 +225,20 @@
         const scriptURL =
           "https://script.google.com/macros/s/AKfycbxMhru0eAZEqBsP8brgew2Gk5cDM_PLIaPFXrIHAZDaHBVT_fvgL7Y5wwwRBtWUTWDJ/exec";
 
-        const form = document.forms["submit-to-google-sheet2"];
+        const form2 = document.forms["submit-to-google-sheet2"];
 
         // Create FormData and append all necessary fields
-        const formData = new FormData(form);
-        formData.append("name", userName);
-        formData.append("email", userEmail);
-        formData.append("dateTime", currentDateTime); // Adding current date and time
-        formData.append("problemId", problemId); // Adding problemId
-        formData.append("problemName", problemName); // Adding problemName
+        const form2Data = new FormData(form2);
+        form2Data.append("name", userName);
+        form2Data.append("email", userEmail);
+        form2Data.append("dateTime", currentDateTime); // Adding current date and time
+        form2Data.append("problemId", problemId); // Adding problemId
+        form2Data.append("problemName", problemName); // Adding problemName
 
         // Send data to Google Sheets
         fetch(scriptURL, {
           method: "POST",
-          body: formData,
+          body: form2Data,
         })
           .then((response) => {
             if (response.ok) {
