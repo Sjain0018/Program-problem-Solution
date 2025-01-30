@@ -251,6 +251,7 @@
             console.log("Success!", data);
             document.getElementById("message").textContent =
               "Your details submitted successfully!";
+              form2.reset();
           })
           .catch((error) => {
             console.error("Error!", error.message);

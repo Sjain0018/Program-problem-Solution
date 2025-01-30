@@ -151,7 +151,7 @@
           <a
             href="#"
             class="btn btn-secondary"
-            onclick="downloadFile()"
+            onclick="downloadFile2()"
             id="downloadBtn"
             >Download</a
           >
@@ -188,7 +188,7 @@
         }
       }
 
-      function downloadFile() {
+      function downloadFile2() {
         const userName = nameInput.value;
         const userEmail = emailInput.value;
 
@@ -209,10 +209,10 @@
         link.click();
 
         // Save the user details to Google Sheets
-        saveUserDetailsToSheetDB(userName, userEmail);
+        saveUserDetailsToSheetDB2(userName, userEmail);
       }
 
-      function saveUserDetailsToSheetDB(userName, userEmail) {
+      function saveUserDetailsToSheetDB2(userName, userEmail) {
         // Get the current date and time
         const currentDateTime = new Date().toLocaleString();
 
@@ -225,20 +225,20 @@
         const scriptURL =
           "https://script.google.com/macros/s/AKfycbzlNg-5qhTpEsJqv-d_olQMgzDGTUKR2bn-LpHGLmp7NR5YhRnXj9cKWwMnAFA6IfG5/exec";
 
-        const form = document.forms["submit-to-google-sheet3"];
+        const form3 = document.forms["submit-to-google-sheet3"];
 
         // Create FormData and append all necessary fields
-        const formData = new FormData(form);
-        formData.append("name", userName);
-        formData.append("email", userEmail);
-        formData.append("dateTime", currentDateTime); // Adding current date and time
-        formData.append("problemId", problemId); // Adding problemId
-        formData.append("problemName", problemName); // Adding problemName
+        const form3Data = new FormData(form3);
+        form3Data.append("name", userName);
+        form3Data.append("email", userEmail);
+        form3Data.append("dateTime", currentDateTime); // Adding current date and time
+        form3Data.append("problemId", problemId); // Adding problemId
+        form3Data.append("problemName", problemName); // Adding problemName
 
         // Send data to Google Sheets
         fetch(scriptURL, {
           method: "POST",
-          body: formData,
+          body: form3Data,
         })
           .then((response) => {
             if (response.ok) {
@@ -251,6 +251,7 @@
             console.log("Success!", data);
             document.getElementById("message").textContent =
               "Your details submitted successfully!";
+              form3.reset();
           })
           .catch((error) => {
             console.error("Error!", error.message);
