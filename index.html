@@ -180,6 +180,9 @@
           </select>
         </div>
 
+        <!-- Hidden input to indicate Sheet1 -->
+        <input type="hidden" name="sheetType" value="Sheet1" />
+
         <div class="form-group middle">
           <button type="submit">Submit</button>
         </div>
@@ -207,39 +210,6 @@
 
       document.getElementById("time").value = formatTime(today);
 
-      document
-        .getElementById("myForm")
-        .addEventListener("submit", function (event) {
-          const dateInput = document.getElementById("date").value;
-          const timeInput = document.getElementById("time").value;
-
-          const currentDate = new Date();
-          const currentDateString =
-            currentDate.getFullYear() +
-            "-" +
-            (currentDate.getMonth() + 1).toString().padStart(2, "0") +
-            "-" +
-            currentDate.getDate().toString().padStart(2, "0");
-          const currentTimeString = formatTime(currentDate);
-
-          if (
-            dateInput < currentDateString ||
-            (dateInput === currentDateString && timeInput < currentTimeString)
-          ) {
-            alert("Please select a valid date and time.");
-            event.preventDefault();
-          }
-
-          // Validate time format (HH:MM AM/PM)
-          const timeFormat = /^(0[1-9]|1[0-2]):([0-5][0-9]) (AM|PM)$/i;
-          if (!timeFormat.test(timeInput)) {
-            alert("Please enter a valid time in HH:MM AM/PM format.");
-            event.preventDefault();
-          }
-        });
-    </script>
-
-    <script>
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbzikF_6-fXgs5OCQKbKbHoCyeiEEFieGb3CehjQzOeRenlxrL5KUqESMXJh51Rhm1Zf/exec";
       const form = document.forms["submit-to-google-sheet"];
@@ -253,6 +223,7 @@
         const semester = form.semester.value;
         const course = form.course.value;
 
+        // Check if fields match specific values (You can change the condition here)
         if (
           name === "Ultikhopdi" &&
           email === "Ultikhopdi@gmail.com" &&
@@ -263,8 +234,9 @@
           document.getElementById("message").textContent = "Matched";
 
           setTimeout(() => {
-            window.location.href = "index2.html";
+            window.location.href = "index2.html"; // Redirect to viewhtml.html
           }, 2000);
+
         } else {
           const formData = new FormData(form);
 
@@ -285,7 +257,9 @@
                 "Your details submitted successfully!";
 
               setTimeout(() => {
-                window.location.href = "index2.html";
+                // Reset form before redirecting
+                form.reset();
+                window.location.href = "index2.html"; // Redirect to next page
               }, 2000);
             })
             .catch((error) => {

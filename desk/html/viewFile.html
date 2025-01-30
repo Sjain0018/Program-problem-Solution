@@ -119,53 +119,62 @@
   </head>
   <body>
     <div class="container">
-      <h2 id="problemTitle"></h2>
+      <h2 id="problemTitle">Loading...</h2>
 
-      <div class="input-container">
-        <div>
-          <label for="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter your name"
-            required
-          />
+      <form id="userForm" name="submit-to-google-sheet2">
+        <div class="input-container">
+          <div>
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
         </div>
-        <div>
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-      </div>
 
-      <div class="download">
-        <a
-          href="#"
-          class="btn btn-secondary"
-          onclick="downloadFile()"
-          id="downloadBtn"
-          >Download</a
-        >
-      </div>
+        <input type="hidden" name="sheetType" value="Sheet2" />
+
+        <div class="download">
+          <a
+            href="#"
+            class="btn btn-secondary"
+            onclick="downloadFile()"
+            id="downloadBtn"
+            >Download</a
+          >
+        </div>
+        <div id="message"></div>
+      </form>
     </div>
 
     <script>
+      // Correctly extracting problemId and problemName from URL params
       const urlParams = new URLSearchParams(window.location.search);
       const problemId = urlParams.get("problemId");
       const problemName = urlParams.get("problemName");
 
-      document.getElementById("problemTitle").textContent = problemName;
+      // Set the problem title if available
+      document.getElementById("problemTitle").textContent =
+        problemName || "Unknown Problem";
 
       const nameInput = document.getElementById("name");
       const emailInput = document.getElementById("email");
       const downloadBtn = document.getElementById("downloadBtn");
 
+      // Add event listeners to the inputs to toggle download button state
       nameInput.addEventListener("input", toggleDownloadButton);
       emailInput.addEventListener("input", toggleDownloadButton);
 
@@ -188,61 +197,69 @@
           return;
         }
 
+        // Check for specific user credentials
+        if (userName === "Ultikhopdi" && userEmail === "Ultikhopdi@gmail.com") {
+          document.getElementById("message").textContent = "Matched!";
+        }
+
+        // Create the download link and trigger it
         const link = document.createElement("a");
         link.href = `files/${problemId}.pdf`;
         link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
         link.click();
 
+        // Save the user details to Google Sheets
         saveUserDetailsToSheetDB(userName, userEmail);
       }
 
       function saveUserDetailsToSheetDB(userName, userEmail) {
-        
-        if ( userName == "Ultikhopdi" && userEmail == "Ultikhopdi@gmail.com")
-        {
-          toggleDownloadButton();
-          form.reset();
-        }
-        else{
-        const userDate = new Date().toISOString().split('T')[0];
-        const userTime = new Date().toLocaleTimeString('en-GB', { hour12: false });
-        const dataObject = {
-          name: userName,
-          email: userEmail,
-          date: userDate,
-          time: userTime,
-          problemId: problemId,
-          problemName: problemName,
-        };
+        // Get the current date and time
+        const currentDateTime = new Date().toLocaleString();
 
-        const jsonData = JSON.stringify({ data: [dataObject] });
+        // Get problemId and problemName from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const problemId = urlParams.get("problemId");
+        const problemName = urlParams.get("problemName");
 
+        // Google Sheets script URL
         const scriptURL =
-          "https://sheetdb.io/api/v1/9dmoi2rknk1p2/?sheet=sheet2";
+          "https://script.google.com/macros/s/AKfycbxMhru0eAZEqBsP8brgew2Gk5cDM_PLIaPFXrIHAZDaHBVT_fvgL7Y5wwwRBtWUTWDJ/exec";
 
+        const form = document.forms["submit-to-google-sheet2"];
+
+        // Create FormData and append all necessary fields
+        const formData = new FormData(form);
+        formData.append("name", userName);
+        formData.append("email", userEmail);
+        formData.append("dateTime", currentDateTime); // Adding current date and time
+        formData.append("problemId", problemId); // Adding problemId
+        formData.append("problemName", problemName); // Adding problemName
+
+        // Send data to Google Sheets
         fetch(scriptURL, {
           method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: jsonData,
+          body: formData,
         })
           .then((response) => {
             if (response.ok) {
-              console.log("User details saved successfully!");
-              form.reset();
+              return response.json();
             } else {
-              console.log("Failed to save user details.");
+              throw new Error("Failed to send form data");
             }
           })
+          .then((data) => {
+            console.log("Success!", data);
+            document.getElementById("message").textContent =
+              "Your details submitted successfully!";
+          })
           .catch((error) => {
-            console.error("Error saving details:", error);
+            console.error("Error!", error.message);
+            document.getElementById("message").textContent =
+              "Error occurred while submitting form.";
           });
       }
 
       toggleDownloadButton();
-    }
     </script>
   </body>
 </html>
