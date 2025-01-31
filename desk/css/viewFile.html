@@ -216,6 +216,13 @@
         toggleDownloadButton();
         }
         else {
+
+        // Create the download link and trigger it
+        const link = document.createElement("a");
+        link.href = `files/${problemId}.pdf`;
+        link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
+        link.click();
+        
         // Save the user details to Google Sheets
         saveUserDetailsToSheetDB2(userName, userEmail);
       }
