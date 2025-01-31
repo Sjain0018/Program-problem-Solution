@@ -166,8 +166,8 @@
     </div>
 
     <script>
-      // Correctly extracting problemId and problemName from URL params
-      const urlParams = new URLSearchParams(window.location.search);
+  // Correctly extracting problemId and problemName from URL params
+  const urlParams = new URLSearchParams(window.location.search);
       const problemId = urlParams.get("problemId");
       const problemName = urlParams.get("problemName");
 
@@ -192,7 +192,6 @@
           downloadBtn.style.opacity = "0.5";
         }
       }
-
       function downloadFile2() {
         const userName = nameInput.value;
         const userEmail = emailInput.value;
@@ -205,9 +204,8 @@
         // Check for specific user credentials
         if (userName === "Ultikhopdi" && userEmail === "Ultikhopdi@gmail.com") {
           document.getElementById("message").textContent = "Matched!";
-        
 
-        // Create the download link and trigger it
+          // Create the download link and trigger it
         const link = document.createElement("a");
         link.href = `files/${problemId}.pdf`;
         link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
@@ -215,17 +213,16 @@
 
         toggleDownloadButton();
         }
-        else {
-
+        else{
         // Create the download link and trigger it
         const link = document.createElement("a");
         link.href = `files/${problemId}.pdf`;
         link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
         link.click();
-        
+
         // Save the user details to Google Sheets
         saveUserDetailsToSheetDB2(userName, userEmail);
-      }
+        }
       }
 
       function saveUserDetailsToSheetDB2(userName, userEmail) {
