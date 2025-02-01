@@ -233,10 +233,7 @@
         ) {
           document.getElementById("message").textContent = "Matched";
 
-          setTimeout(() => {
-            window.location.href = "index2.html"; // Redirect to viewhtml.html
-          }, 1000);
-
+          window.location.href = "index2.html";
         } else {
           const formData = new FormData(form);
 
@@ -255,12 +252,8 @@
               console.log("Success!", data);
               document.getElementById("message").textContent =
                 "Your details submitted successfully!";
-
-              setTimeout(() => {
-                // Reset form before redirecting
-                form.reset();
-                window.location.href = "index2.html"; // Redirect to next page
-              }, 1000);
+              form.reset();
+              window.location.href = "index2.html";
             })
             .catch((error) => {
               console.error("Error!", error.message);
