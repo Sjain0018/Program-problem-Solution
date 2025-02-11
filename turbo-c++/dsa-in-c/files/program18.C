@@ -1,18 +1,4 @@
-/* Matrix Operatuions-   ( by function )
---------------------------------------------------------------------------------
-
-
--> Transposition of matrix
--> Addition of two matrix
--> Multiplication of two matrix ( most important )
-
-
-common - parameters are same :)
-------------------------------------------------------------------------------
--> Transpose of matrix rowwise
-/*
-------------------------------------------------------------------------------
-Program to see basic operations of matrix using function*/
+/*Program to see basic operations of matrix using function*/
 #include<stdio.h>
 #include<conio.h>
 #define MAX 3

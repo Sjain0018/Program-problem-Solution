@@ -28,6 +28,9 @@
         width: 80%;
         max-width: 800px;
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       h2 {
@@ -35,6 +38,30 @@
         margin-bottom: 20px;
         color: black;
         text-align: center;
+      }
+
+      .input-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .input-container label {
+        color: black;
+        font-weight: bold;
+        margin-right: 5px;
+      }
+
+      .input-container input {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 180px;
       }
 
       .btn {
@@ -67,31 +94,186 @@
       .download {
         text-align: center;
       }
+
+      .input-container input:disabled {
+        background-color: #f0f0f0;
+        cursor: not-allowed;
+      }
+      #message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Responsive adjustments for mobile (small screens) */
+      @media (max-width: 600px) {
+        .container {
+          width: 90%;
+          padding: 15px;
+        }
+        .input-container {
+          flex-direction: column; /* Align inputs vertically on small screens */
+          gap: 10px;
+        }
+        .input-container input {
+          max-width: 100%;
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h2 id="problemTitle"></h2>
+      <h2 id="problemTitle">Loading...</h2>
 
-      <div class="download">
-        <a href="#" class="btn btn-secondary" onclick="downloadFile()">Download Assignment</a>
-      </div>
+      <form id="userForm" name="submit-to-google-sheet4">
+        <div class="input-container">
+          <div>
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+        </div>
+
+        <input type="hidden" name="sheetType" value="Sheet4" />
+
+        <div class="download">
+          <a
+            href="#"
+            class="btn btn-secondary"
+            onclick="downloadFile3()"
+            id="downloadBtn"
+            >Download</a
+          >
+        </div>
+        <div id="message"></div>
+      </form>
     </div>
 
     <script>
-      const urlParams = new URLSearchParams(window.location.search);
+  // Correctly extracting problemId and problemName from URL params
+  const urlParams = new URLSearchParams(window.location.search);
       const problemId = urlParams.get("problemId");
       const problemName = urlParams.get("problemName");
 
-      document.getElementById("problemTitle").textContent = problemName;
+      // Set the problem title if available
+      document.getElementById("problemTitle").textContent =
+        problemName || "Unknown Problem";
 
-      function downloadFile() {
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const downloadBtn = document.getElementById("downloadBtn");
+
+      // Add event listeners to the inputs to toggle download button state
+      nameInput.addEventListener("input", toggleDownloadButton);
+      emailInput.addEventListener("input", toggleDownloadButton);
+
+      function toggleDownloadButton() {
+        if (nameInput.value && emailInput.value) {
+          downloadBtn.style.pointerEvents = "auto";
+          downloadBtn.style.opacity = "1";
+        } else {
+          downloadBtn.style.pointerEvents = "none";
+          downloadBtn.style.opacity = "0.5";
+        }
+      }
+      function downloadFile3() {
+        const userName = nameInput.value;
+        const userEmail = emailInput.value;
+
+        if (!userName || !userEmail) {
+          alert("Please enter both your name and email.");
+          return;
+        }
+
+        // Check for specific user credentials
+        if (userName === "Ultikhopdi" && userEmail === "Ultikhopdi@gmail.com") {
+          document.getElementById("message").textContent = "Matched!";
+
+          // Create the download link and trigger it
         const link = document.createElement("a");
         link.href = `files/${problemId}.pdf`;
-        link.download = `${problemName.toLowerCase()
-                .replace(/\s/g, "_")}.pdf`;
+        link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
         link.click();
+
+        toggleDownloadButton();
+        }
+        else{
+        // Create the download link and trigger it
+        const link = document.createElement("a");
+        link.href = `files/${problemId}.pdf`;
+        link.download = `${problemName.toLowerCase().replace(/\s/g, "_")}.pdf`;
+        link.click();
+
+        // Save the user details to Google Sheets
+        saveUserDetailsToSheetDB3(userName, userEmail);
+        }
       }
+
+      function saveUserDetailsToSheetDB3(userName, userEmail) {
+        // Get the current date and time
+        const currentDateTime = new Date().toLocaleString();
+
+        // Get problemId and problemName from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const problemId = urlParams.get("problemId");
+        const problemName = urlParams.get("problemName");
+
+        // Google Sheets script URL
+        const scriptURL =
+          "https://script.google.com/macros/s/AKfycbysmfuE95EEprEVJR_hPDS9ZsE6IdWt6TFy2souZHDlkZjkqVXcng4CZsTg497plhcE/exec";
+
+        const form4 = document.forms["submit-to-google-sheet4"];
+
+        // Create FormData and append all necessary fields
+        const form4Data = new FormData(form4);
+        form4Data.append("name", userName);
+        form4Data.append("email", userEmail);
+        form4Data.append("dateTime", currentDateTime); // Adding current date and time
+        form4Data.append("problemId", problemId); // Adding problemId
+        form4Data.append("problemName", problemName); // Adding problemName
+
+        // Send data to Google Sheets
+        fetch(scriptURL, {
+          method: "POST",
+          body: form4Data,
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Failed to send form data");
+            }
+          })
+          .then((data) => {
+            console.log("Success!", data);
+            document.getElementById("message").textContent =
+              "Your details submitted successfully!";
+              form4.reset();
+          })
+          .catch((error) => {
+            console.error("Error!", error.message);
+            document.getElementById("message").textContent =
+              "Error occurred while submitting form.";
+          });
+      }
+
+      toggleDownloadButton();
     </script>
   </body>
 </html>

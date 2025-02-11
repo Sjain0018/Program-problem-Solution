@@ -14,6 +14,12 @@
         "DELE.C": "cpp",
         "program6.txt.C": "cpp",
         "BS.C": "cpp",
-        "INTIAZLI.C": "cpp"
-    }
+        "INTIAZLI.C": "cpp",
+        "ADD.C": "cpp",
+        "OPERA.C": "cpp",
+        "program17.C": "cpp",
+        "OPERA2.C": "cpp",
+        "program18.C": "cpp"
+    },
+    "liveServer.settings.port": 5501
 }

@@ -1,65 +1,143 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-  }
-  
-  header {
-    background-color: rgb(23, 23, 167);
-    color: white;
-    padding: 15px;
-    text-align: center;
-  }
-  
-  input#searchBar {
-    padding: 10px;
-    margin-top: 10px;
-    width: 80%;
-    font-size: 16px;
-  }
-  
-  .program-list {
-    margin: 20px;
-  }
-  
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fc;
+  color: #333;
+}
+
+header {
+  background-color: rgb(23, 23, 167);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+input#searchBar {
+  padding: 12px;
+  margin-top: 15px;
+  width: 75%;
+  font-size: 16px;
+  border-radius: 30px;
+  border: 2px solid rgb(23, 23, 167);
+  outline: none;
+  transition: all 0.3s;
+}
+
+input#searchBar:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.6);
+}
+
+.program-list {
+  margin: 20px;
+}
+
+.program-item {
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.program-item:hover {
+  transform: translateY(-10px);  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.program-item .program-number {
+  font-weight: bold;
+  font-size: 20px;
+  color: rgb(23, 23, 167);
+}
+
+.program-item .program-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-btn,
+.lecture-btn {
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: none;
+}
+
+.view-btn {
+  background-color: rgb(23, 23, 167);
+  color: white;
+}
+
+.view-btn a {
+  color: white;
+  text-decoration: none;
+}
+
+.view-btn:hover {
+  background-color: #303f9f;
+  transform: scale(1.05);
+}
+
+.lecture-btn {
+  background-color: #00bcd4;
+  color: white;
+}
+
+.lecture-btn:hover {
+  background-color: #0097a7;
+  transform: scale(1.05);
+}
+
+/* For disabled buttons */
+.view-btn[style*="pointer-events: none"] {
+  background-color: #b0bec5;
+  cursor: not-allowed;
+}
+
+.lecture-btn[style*="pointer-events: none"] {
+  background-color: #80e27e;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .program-item {
-    background-color: white;
     padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
-  
-  .program-number {
-    font-weight: bold;
-    font-size: 18px;
+
+  .view-btn,
+  .lecture-btn {
+    padding: 10px 25px;
+    font-size: 14px;
   }
-  
-  .view-btn {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+
+  input#searchBar {
+    width: 90%;
   }
-  
-  .view-btn a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .view-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .message {
-    text-align: center;
-    color: #ff0000;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-  
+}
