@@ -114,7 +114,7 @@
 
       <!-- Compiler Selection Buttons -->
       <div id="button-container">
-        <div class="button-box" onclick="showList('turbo')">Turbo C++</div>
+        <div class="button-box" onclick="showList('turbo')" style="pointer-events: none; opacity: 0.8;">Turbo C++</div>
         <div class="button-box" onclick="showList('desk')">Desk Warrior</div>
       </div>
 
@@ -168,7 +168,12 @@
             listItem.className = "list-item";
             listItem.textContent = topic;
 
-            
+            if ( topic == "JAVASCRIPT")
+          {
+            listItem.style.pointerEvents = "none";
+            listItem.style.opacity = "0.5";
+          }
+          else{
               listItem.onclick = function () {
                 window.location.href = `https://sjain0018.github.io/Program-problem-Solution/desk/${topic
                   .toLowerCase()
@@ -177,6 +182,7 @@
                   .replace(/\s/g, "-")}.html`;
               };
             list.appendChild(listItem);
+          }
           });
         } else {
           message.innerHTML =
