@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Problem Solution</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: rgb(23, 23, 167);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: 90vh;
+        max-width: 800px;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: #333;
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #555;
+        text-align: center;
+      }
+
+      #fileContent {
+        width: 100%;
+        height: 70vh;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 15px;
+        font-family: "Courier New", monospace;
+        white-space: pre-wrap;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+        color: white;
+        background-color: rgb(1, 1, 19);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>View Problem Solution</h1>
+      <h2 id="problemTitle"></h2>
+      <div id="fileContent"></div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const problemId = urlParams.get("problemId");
+      const problemName = urlParams.get("problemName");
+
+      document.getElementById("problemTitle").textContent = problemName;
+
+      fetch(`files/${problemId}.c`)
+        .then((response) => response.text())
+        .then((text) => {
+          document.getElementById("fileContent").textContent = text;
+        })
+        .catch((error) => {
+          document.getElementById("fileContent").textContent =
+            "Failed to load file content.";
+          console.error("Error:", error);
+        });
+
+    </script>
+  </body>
+</html>

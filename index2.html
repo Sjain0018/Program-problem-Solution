@@ -114,7 +114,7 @@
 
       <!-- Compiler Selection Buttons -->
       <div id="button-container">
-        <div class="button-box" onclick="showList('turbo')" style="pointer-events: none; opacity: 0.8;">Turbo C++</div>
+        <div class="button-box" onclick="showList('turbo')" >Turbo C++</div>
         <div class="button-box" onclick="showList('desk')">Desk Warrior</div>
       </div>
 
@@ -142,16 +142,19 @@
         if (compiler === "turbo") {
           listTitle.innerHTML = "Choose a topic from Turbo C++";
           // Turbo C++ Topics
-          const topics = ["OOPS", "DSA in C", "DSA in C++"];
+          const topics = ["Graphics","OOPS", "DSA in C", "DSA in C++"];
           topics.forEach((topic) => {
             const listItem = document.createElement("li");
             listItem.className = "list-item";
             listItem.textContent = topic;
+            if( topic == "OOPS" || topic == "DSA in C" || topic == "DSA in C++")
+          {
             listItem.classList.add("disabled");
             listItem.style.pointerEvents = "none";
             listItem.style.opacity = "0.5";
+          }
             listItem.onclick = function () {
-              window.location.href = `https://sjain0018.github.io/Program-problem-Solution/turbo-c++/${topic
+              window.location.href = `turbo-c++/${topic
                 .toLowerCase()
                 .replace(/\s/g, "-")}/${topic
                 .toLowerCase()

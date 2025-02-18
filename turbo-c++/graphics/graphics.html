@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Computer Graphics</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Program Problems List</h1>
+      <input
+        type="text"
+        id="searchBar"
+        placeholder="Search Problem..."
+        onkeyup="searchProblems()"
+      />
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/1.png" alt="Image 1" />
+            </div>
+            <div class="card-back">
+              <h3>One Pixel</h3>
+              <a href="viewFile.html?problemId=1&problemName=One%20Pixel" class="view-code-btn">View Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/2.png" alt="Image 2" />
+            </div>
+            <div class="card-back">
+              <h3>Line</h3>
+              <a href="viewFile.html?problemId=2&problemName=Line" class="view-code-btn">View Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/3.png" alt="Image 3" />
+            </div>
+            <div class="card-back">
+              <h3>Circle</h3>
+              <a href="viewFile.html?problemId=3&problemName=Circle" class="view-code-btn">View Code</a>
+            </div>
+          </div>
+        </div>
+
+
+         <!-- Card 4 -->
+         <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="image/4.png" alt="Image 4" />
+            </div>
+            <div class="card-back">
+              <h3>Rectangle</h3>
+              <a href="viewFile.html?problemId=4&problemName=Rectangle" class="view-code-btn">View Code</a>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Add -->
+      </div>
+    </main>
+
+    <!-- Message for the unlisted problem-->
+    <div id="problem-form" style="display: none">
+      <h3>Your Problem is not found.</h3>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

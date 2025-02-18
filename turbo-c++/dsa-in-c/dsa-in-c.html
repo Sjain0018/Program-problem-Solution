@@ -258,53 +258,10 @@
 
     <div id="message" class="message"></div>
 
-    <!-- Form to send the unlisted problem-->
+    <!-- Message for the unlisted problem-->
     <div id="problem-form" style="display: none">
-      <h3>Your Problem is not listed. It will be sent to the programmer.</h3>
-      <form id="userProblemForm" name="submit-to-google-sheet">
-        <label for="problemName">Problem Name:</label>
-        <input type="text" id="problemName" name="problemName" required />
-        <label for="Name">Name:</label>
-        <input type="name" name="Name" required />
-        <label for="Email">Email</label>
-        <input type="email" name="Email" required />
-        <button type="submit">Send to Programmer</button>
-      </form>
+      <h3>Your Problem is not found.</h3>
     </div>
     <script src="script.js"></script>
-    <script>
-      const scriptURL =
-        "https://script.google.com/macros/s/AKfycbwOk202uExw9ngJA480lJmvjYwFJI75-aAaJNLcgyEXZ-hozQZuswZKxCsYhLt0gT0s/exec";
-      const form = document.forms["submit-to-google-sheet"];
-      const messageElement = document.getElementById("message");
-
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        messageElement.innerHTML = "Sending problem to programmer...";
-
-        fetch(scriptURL, {
-          method: "POST",
-          body: new FormData(form),
-        })
-          .then((response) => {
-            if (response.ok) {
-              messageElement.innerHTML =
-                "Problem successfully sent to the programmer!";
-              setTimeout(() => {
-                messageElement.innerHTML = "";
-              }, 5000);
-              form.reset();
-            } else {
-              throw new Error("Failed to send problem");
-            }
-          })
-          .catch((error) => {
-            messageElement.innerHTML =
-              "There was an error sending your problem. Please try again later.";
-            console.error("Error:", error.message);
-          });
-      });
-    </script>
   </body>
 </html>
