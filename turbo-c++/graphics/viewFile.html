@@ -74,7 +74,7 @@
 
       document.getElementById("problemTitle").textContent = problemName;
 
-      fetch(`files/${problemId}.c`)
+      fetch(`files/${problemId}.txt`)
         .then((response) => response.text())
         .then((text) => {
           document.getElementById("fileContent").textContent = text;
