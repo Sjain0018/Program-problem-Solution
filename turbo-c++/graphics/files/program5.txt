@@ -1,0 +1,16 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+void main()
+{
+int gd=DETECT,gm;
+initgraph(&gd,&gm,"");
+setbkcolor(WHITE);
+setcolor(BLUE);
+circle(300,100,10);
+circle(300,155,45);
+line(300,300,262,180);
+line(300,300,338,180);
+getch();
+closegraph();
+}

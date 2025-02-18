@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+void main()
+{
+    int gd = DETECT, gm;
+    int radius = 35;
+    initgraph(&gd, &gm, "");
+    setbkcolor(WHITE);
+
+    // Draw the stand of the traffic light
+    setfillstyle(SOLID_FILL, DARKGRAY);
+    bar(250, 10, 400, 300);    // Main stand
+    bar(300, 300, 350, 400);   // Bottom part of the stand
+    bar(270, 400, 380, 430);   // Bottom rectangle
+
+    // Red light
+    setcolor(RED);
+    circle(325, 60, radius);
+    setfillstyle(SOLID_FILL, RED);
+    floodfill(325, 60, RED);
+
+    // Green light
+    setcolor(GREEN);
+    circle(325, 150, radius);
+    setfillstyle(SOLID_FILL, GREEN);
+    floodfill(325, 150, GREEN);
+
+    // Yellow light
+    setcolor(YELLOW);
+    circle(325, 240, radius);
+    setfillstyle(SOLID_FILL, YELLOW);
+    floodfill(325, 240, YELLOW);
+
+    getch();
+    closegraph();
+}
