@@ -9,6 +9,7 @@ body {
 header {
   background-color: rgb(23, 23, 167);
   color: white;
+  width: 100%;
   padding: 15px;
   text-align: center;
 }
@@ -22,7 +23,6 @@ input#searchBar {
 
 /* Main Container */
 main {
-  padding: 20px;
   display: flex;
   justify-content: center;
 }
