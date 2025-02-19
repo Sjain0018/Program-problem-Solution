@@ -4,16 +4,138 @@ body {
   padding: 0;
   height: 100%;
   background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Header styles */
 header {
   background-color: rgb(23, 23, 167);
   color: white;
   width: 100%;
   padding: 15px;
   text-align: center;
+  position: relative;
 }
 
+/* Sidebar */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  left: 0;
+  background-color: darkblue;
+  overflow-x: hidden;
+  padding-top: 20px;
+  display: none;
+  z-index: 1;
+  transition: 0.3s;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 8px 16px;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: white;
+  color: blue;
+}
+
+/* Close icon  */
+.sidebar .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+/* Hamburger Icon  */
+.hamburger {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+/* Sidebar visibility on large screens */
+@media screen and (min-width: 769px) {
+  header {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
+  .sidebar {
+    display: block;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  main {
+    margin-top: 10px;
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
+}
+
+/* Sidebar toggle for small screens */
+@media screen and (max-width: 768px) {
+  header{
+    margin: 0;
+    padding: 0;
+  }
+  .container{
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .hamburger {
+    display: block;
+  }
+
+  .main-container {
+    margin-top: 60px;
+  }
+
+  /* When sidebar is toggled */
+  .sidebar {
+    display: none;
+  }
+
+  .sidebar.show {
+    display: block;
+  }
+  .sidebar .close-btn {
+    display: block;
+  }
+  .container {
+    width: 100%;
+  }
+}
+
+/* Search bar*/
 input#searchBar {
   padding: 10px;
   margin-top: 10px;
@@ -21,28 +143,32 @@ input#searchBar {
   font-size: 16px;
 }
 
-/* Main Container */
-main {
+/* Main content */
+.main-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
+/* Container for the program cards */
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 20px;
   width: 100%;
-  margin: 0;
   padding: 20px;
+  margin-left: 0;
+  transition: margin-left 0.3s ease-in-out;
 }
 
-/* Card styles */
+/* Card */
 .card {
   width: 100%;
-  height: 250px;
+  height: 300px;
   perspective: 1000px;
   box-shadow: 7px 7px 7px rgb(32, 32, 56);
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .card-inner {
@@ -64,7 +190,6 @@ main {
   height: 100%;
   backface-visibility: hidden;
   border-radius: 8px;
-  overflow: hidden;
 }
 
 .card-front {
@@ -92,8 +217,8 @@ main {
   margin-bottom: 20px;
 }
 
-/* Button styles */
-.view-code-explain{
+/* Button  */
+.view-code-explain {
   padding: 10px 20px;
   margin-bottom: 10px;
   background-color: cyan;
@@ -103,11 +228,13 @@ main {
   border-radius: 5px;
   text-decoration: none;
 }
-.view-code-explain:hover{
+
+.view-code-explain:hover {
   background-color: white;
   border: 2px solid black;
   color: black;
 }
+
 .view-code-btn {
   padding: 10px 20px;
   background-color: cyan;
@@ -133,4 +260,5 @@ main {
 
 h3 {
   text-align: center;
+  color: white;
 }
