@@ -171,12 +171,7 @@
             listItem.className = "list-item";
             listItem.textContent = topic;
 
-            if ( topic == "JAVASCRIPT")
-          {
-            listItem.style.pointerEvents = "none";
-            listItem.style.opacity = "0.5";
-          }
-          else{
+           
               listItem.onclick = function () {
                 window.location.href = `https://sjain0018.github.io/Program-problem-Solution/desk/${topic
                   .toLowerCase()
@@ -185,7 +180,6 @@
                   .replace(/\s/g, "-")}.html`;
               };
             list.appendChild(listItem);
-          }
           });
         } else {
           message.innerHTML =
