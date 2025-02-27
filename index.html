@@ -189,6 +189,8 @@
       </form>
       <div id="message"></div>
     </div>
+
+    
     <script>
       const today = new Date();
       const formattedDate =
@@ -204,7 +206,7 @@
         const minutes = date.getMinutes().toString().padStart(2, "0");
         const ampm = hours >= 12 ? "PM" : "AM";
         hours = hours % 12;
-        hours = hours ? hours : 12; // Adjust 0 to 12 for 12 AM
+        hours = hours ? hours : 12; 
         return hours + ":" + minutes + " " + ampm;
       }
 
@@ -217,6 +219,10 @@
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
+        const submitButton = form.querySelector("button");
+        submitButton.disabled = true; 
+        submitButton.textContent = "Submitting..."; 
+
         const name = form.name.value;
         const email = form.email.value;
         const phone = form.phone.value;
@@ -224,7 +230,8 @@
         const course = form.course.value;
 
         document.getElementById("message").textContent = "Sending your details";
-        // Check if fields match specific values (You can change the condition here)
+
+        
         if (
           name === "Ultikhopdi" &&
           email === "Ultikhopdi@gmail.com" &&
@@ -233,7 +240,6 @@
           course === "BCA"
         ) {
           document.getElementById("message").textContent = "Matched";
-
           window.location.href = "index2.html";
         } else {
           const formData = new FormData(form);
@@ -254,12 +260,14 @@
               document.getElementById("message").textContent =
                 "Your details submitted successfully!";
               form.reset();
-              window.location.href = "index2.html";
+              window.location.href = "index2.html"; 
             })
             .catch((error) => {
               console.error("Error!", error.message);
               document.getElementById("message").textContent =
                 "Error occurred while submitting form.";
+              submitButton.disabled = false; 
+              submitButton.textContent = "Submit"; 
             });
         }
       });
