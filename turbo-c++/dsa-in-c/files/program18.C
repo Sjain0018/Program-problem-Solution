@@ -1,4 +1,4 @@
-/*Program to see basic operations of matrix using function*/
+/*Program to transposition matrix using function*/
 #include<stdio.h>
 #include<conio.h>
 #define MAX 3

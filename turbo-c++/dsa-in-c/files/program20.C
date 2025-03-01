@@ -1,16 +1,6 @@
-/* Matrix Operatuions-   ( by function )
---------------------------------------------------------------------------------
-
-
--> Transposition of matrix
--> Addition of two matrix
--> Multiplication of two matrix ( most important )
-
-
-common - parameters are same :)
+/*
 ------------------------------------------------------------------------------
 -> Multiplication of two matrix
-/*
 ------------------------------------------------------------------------------
 */
 #include<stdio.h>

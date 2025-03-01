@@ -1,17 +1,4 @@
-/*Types of Sparse matrix -  // Must square matrix ( r == c )
-------------------------------------------------------------------------------
-  Diagonal sparse matrix
--> if ( i==j )
-
-  Tridiagonal sparse matrix
--> if ( ( i==j ) || ( i==j - 1 ) || ( i==j + 1 ) )
-
-  Triangular sparse matrix
-  --- Lower Triangular matrix
-     -> if ( i>=j )
-  --- Upper Traingular matrix
-     -> if ( i<=j )
-
+/*
 ------------------------------------------------------------------------------
 //Triangular sparse matrix-
 ------------------------------------------------------------------------------
