@@ -24,5 +24,6 @@
         "program22.C": "cpp",
         "program23.C": "cpp",
         "program24.C": "cpp"
-    }
+    },
+    "liveServer.settings.port": 5501
 }
