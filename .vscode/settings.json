@@ -24,7 +24,11 @@
         "program22.C": "cpp",
         "program23.C": "cpp",
         "program24.C": "cpp",
-        "LAVKUSH.C": "cpp"
+        "LAVKUSH.C": "cpp",
+        "program10.C": "cpp",
+        "ELLIPSE.C": "cpp",
+        "SMILEY.C": "cpp",
+        "KITE.C": "cpp"
     },
     "liveServer.settings.port": 5501
 }

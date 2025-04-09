@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+void main()
+{
+int gd=DETECT,gm;
+initgraph(&gd,&gm,"");
+setbkcolor(WHITE);
+setcolor(DARKGRAY);
+//----
+circle(300,200,150);
+setfillstyle(SOLID_FILL,RED);
+floodfill(300,200,DARKGRAY);
+//----
+ellipse(240,130,0,360,20,35);
+ellipse(360,130,0,360,20,35);
+setfillstyle(SOLID_FILL,DARKGRAY);
+floodfill(240,130,DARKGRAY);
+floodfill(360,130,DARKGRAY);
+//----
+line(220,230,380,230);
+arc(300,230,180,360,80);
+setfillstyle(SOLID_FILL,YELLOW);
+floodfill(300,200,DARKGRAY);
+getch();
+closegraph();
+}

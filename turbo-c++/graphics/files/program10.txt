@@ -1,0 +1,43 @@
+#include<graphics.h>
+#include<conio.h>
+void main()
+{
+int gd=DETECT,gm;
+int y1=150,y2=200,y3=250;
+initgraph(&gd,&gm,"");
+setbkcolor(BLUE);
+//C
+line(50,y1,50,y3);
+line(50,y1,100,y1);
+line(50,y3,100,y3);
+//O
+line(150,y1,200,y1);
+line(150,y1,150,y3);
+line(150,y3,200,y3);
+line(200,y1,200,y3);
+//D
+line(250,y1,250,y3);
+line(240,y1,300,y1+20);
+line(300,y1+20,300,y3-20);
+line(240,y3,300,y3-20);
+//E
+line(350,y1,350,y3);
+line(350,y1,400,y1);
+line(350,y2,400,y2);
+line(350,y3,400,y3);
+//R
+line(450,y1,450,y3);
+line(450,y1,500,y1);
+line(500,y1,500,y2);
+line(450,y2,500,y2);
+line(450,y2,500,y3);
+//J
+line(550,y1,600,y1);
+line(575,y1,575,y3);
+line(575,y3,550,y3);
+line(550,y2,550,y3);
+//I
+line(615,y1,615,y3);
+getch();
+closegraph();
+}
