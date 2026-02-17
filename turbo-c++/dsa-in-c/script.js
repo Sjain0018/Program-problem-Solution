@@ -21,4 +21,3 @@ function searchProblems() {
         document.getElementById('problem-form').style.display = 'none'; 
     }
 }
-
